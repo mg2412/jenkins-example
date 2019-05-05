@@ -5,27 +5,30 @@ pipeline {
         stage ('Compile Stage') {
 
             steps {
-                withMaven(maven : 'localMaven') {
+                def withMaven(maven) {
                     sh 'mvn clean compile'
                 }
+				withMaven(localMaven)
             }
         }
 
         stage ('Testing Stage') {
 
             steps {
-                withMaven(maven : 'localMaven') {
+                def withMaven(maven) {
                     sh 'mvn test'
                 }
+				withMaven(localMaven)
             }
         }
 
 
         stage ('Deployment Stage') {
             steps {
-                withMaven(maven : 'localMaven') {
+                def withMaven(maven) {
                     sh 'mvn deploy'
                 }
+				withMaven(localMaven)
             }
         }
     }
